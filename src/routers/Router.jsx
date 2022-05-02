@@ -2,7 +2,6 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Bebidas from "../container/Bebidas";
 import Guajolotas from "../container/Guajolotas";
 import Home from "../container/Home";
-import Intro from "../container/Intro";
 import Tamales from "../container/Tamales";
 
 const AppRouter = () => {

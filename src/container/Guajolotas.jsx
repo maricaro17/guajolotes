@@ -5,7 +5,9 @@ const categoryName = "guajolotes"
 const Guajolotas = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    loadProducts(categoryName, setProducts);
+    if (!products.length > 0) {
+        loadProducts(categoryName, setProducts);
+    }
   }, [products]);
 
   return (

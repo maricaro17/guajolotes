@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { CarButton, Container, HeaderContainer } from "../styles/styles";
+import Carrrito from "./Carrrito";
 const NavBar = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
   return (
     <Container>
       <HeaderContainer>
@@ -13,11 +16,12 @@ const NavBar = () => {
         </div>
         <CarButton>
           <img
-            src="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1650901516/bookmark/proyecto-final-2/carrito_erc4fk.svg"
-            alt="carrito"
+            src="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1651209405/bookmark/proyecto-final-2/carrito_dxqcxm.svg"
+            alt="carrito" onClick={handleShow}
           />
         </CarButton>
       </HeaderContainer>
+      <Carrrito show={show} setShow={setShow}/>
     </Container>
   );
 };
