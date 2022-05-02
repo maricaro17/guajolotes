@@ -111,7 +111,7 @@ const CardListContainer = styled.div`
 const CardContainer = styled.div`
   border-radius: 20px;
   display: flex;
-  background-color: white;
+  background-color: ${(props)=> props.backgroundColor ? props.backgroundColor : "white"};
   align-items: center;
   margin-bottom: 8px;
   padding: 16px;
@@ -120,7 +120,9 @@ const CardContainer = styled.div`
 
 const CardDetails = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props)=> props.flexDirection ? props.flexDirection : "column" };
+  justify-content: ${(props)=> props.justifyContent ? props.justifyContent : "unset" };
+  width: ${(props)=> props.width ? props.width : "unset" };
   margin-left: 16px;
 `;
 
@@ -274,6 +276,58 @@ const ContainerButtonAddToCard = styled.button`
 const AddToCardSpan = styled.span`
 
 font-weight: 400;
+`;
+const ContainerTotal= styled.div`
+width: 312px;
+height: 53px;
+border-radius: 20px;
+background-color: white;
+color: black;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-left: 10px;
+padding-right: 10px;
+margin: 0 auto;
+
+`;
+const TotalTitle = styled.p`
+
+font-style: normal;
+font-weight: 600;
+font-size: 17px;
+line-height: 21px;
+margin: unset;
+`;
+const Total = styled.p`
+color: var(--primary);
+font-style: normal;
+font-weight: 600;
+font-size: 17px;
+line-height: 21px;
+margin: unset;
+
+`;
+const BtnPagar = styled.div`
+width: 312px;
+height: 69px;
+color: white;
+background-color: var(--primary);
+margin: 0 auto;
+border-radius: 40px;
+position: absolute;
+bottom: 0;
+margin-bottom: 16px;
+
+`;
+const PagarTitle= styled.p`
+font-style: normal;
+font-weight: 600;
+font-size: 17px;
+line-height: 21px;
+text-align: center;
+padding: 24px;
+
 `
 export {
   Container,
@@ -308,5 +362,10 @@ export {
   ContadorBtn,
   ContadorNumber,
   ContainerButtonAddToCard,
-  AddToCardSpan
+  AddToCardSpan,
+  ContainerTotal,
+  TotalTitle,
+  Total,
+  BtnPagar,
+  PagarTitle
 };

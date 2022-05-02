@@ -20,6 +20,7 @@ import Carousel from "./Carousel";
 import getCategory from "../helpers/getCategory";
 import Contador from "./Contador";
 import ButtonAddToCard from "../container/ButtonAddToCard";
+import { addToCar } from "../helpers/addToCar";
 const Card = ({ item, items }) => {
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState(item);
@@ -27,9 +28,15 @@ const Card = ({ item, items }) => {
   const [count, setCount] = useState(1);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleCountUp = ()=> setCount(count + 1)
-  const handleCountDown = ()=> setCount(count - 1)
-
+  const handleCountUp = () => setCount(count + 1);
+  const handleCountDown = () => setCount(count - 1);
+  const handleAddToCar = (e, element) => {
+    const carrito = localStorage.getItem("carrito") ? JSON.parse(localStorage.getItem("carrito")) : [] 
+    const total = count * element.price
+    const data = {...element, total, count}
+    carrito.push(data)
+    addToCar(carrito)
+  };
   let rowOneButtons = items.slice(0, 3);
   let rowTwoButtons = items.slice(3, 6);
 
@@ -46,6 +53,7 @@ const Card = ({ item, items }) => {
   if (category?.name === "guajolotes") {
     title = "Guajolota de Tamal";
   }
+
   return (
     <CardContainer>
       <div>
@@ -72,7 +80,9 @@ const Card = ({ item, items }) => {
             />
           </CarButton>
         </Offcanvas.Header>
-        <Offcanvas.Body style={{ paddingTop: 0, overflow: "hidden" , overflowY:"scroll"}}>
+        <Offcanvas.Body
+          style={{ paddingTop: 0, overflow: "hidden", overflowY: "scroll" }}
+        >
           <Carousel list={items} data={selected} />
           <div>
             <CarouselItemName item={item} option={item.id}>
@@ -80,7 +90,11 @@ const Card = ({ item, items }) => {
             </CarouselItemName>
             <CarouselItemPrice>${item.price} MXN</CarouselItemPrice>
           </div>
-          <Contador count={count} countUp={handleCountUp} countDown={handleCountDown}/>
+          <Contador
+            count={count}
+            countUp={handleCountUp}
+            countDown={handleCountDown}
+          />
           <SaborContainer>
             <SaborTitle>Sabor</SaborTitle>
             <SaborBtn>
@@ -108,7 +122,12 @@ const Card = ({ item, items }) => {
               ))}
             </SaborBtn>
           </SaborContainer>
-          <ButtonAddToCard count={count} price={item.price}/>
+          <ButtonAddToCard
+            count={count}
+            price={item.price}
+            item={item}
+            addToCar={handleAddToCar}
+          />
         </Offcanvas.Body>
       </Offcanvas>
     </CardContainer>
