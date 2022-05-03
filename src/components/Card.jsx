@@ -21,6 +21,8 @@ import getCategory from "../helpers/getCategory";
 import Contador from "./Contador";
 import ButtonAddToCard from "../container/ButtonAddToCard";
 import { addToCar } from "../helpers/addToCar";
+import Guajolocombo from "./Guajolocombo";
+
 const Card = ({ item, items }) => {
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState(item);
@@ -31,15 +33,17 @@ const Card = ({ item, items }) => {
   const handleCountUp = () => setCount(count + 1);
   const handleCountDown = () => setCount(count - 1);
   const handleAddToCar = (e, element) => {
-    const carrito = localStorage.getItem("carrito") ? JSON.parse(localStorage.getItem("carrito")) : [] 
-    const total = count * element.price
-    const data = {...element, total, count}
-    carrito.push(data)
-    addToCar(carrito)
+    const carrito = localStorage.getItem("carrito")
+      ? JSON.parse(localStorage.getItem("carrito"))
+      : [];
+    const total = count * element.price;
+    const data = { ...element, total, count };
+    carrito.push(data);
+    addToCar(carrito);
   };
   let rowOneButtons = items.slice(0, 3);
   let rowTwoButtons = items.slice(3, 6);
-
+  let title;
   useEffect(() => {
     if (!category) {
       let data = items.find((obj) => obj.id === item.id);
@@ -49,7 +53,7 @@ const Card = ({ item, items }) => {
       });
     }
   }, [category, item.id, items, selected]);
-  let title;
+ 
   if (category?.name === "guajolotes") {
     title = "Guajolota de Tamal";
   }
@@ -122,6 +126,13 @@ const Card = ({ item, items }) => {
               ))}
             </SaborBtn>
           </SaborContainer>
+          <Guajolocombo
+            categoryName={
+              category?.name === "guajolotes" || category?.name === "tamales"
+                ? "bebidas"
+                : category?.name
+            }
+          />
           <ButtonAddToCard
             count={count}
             price={item.price}

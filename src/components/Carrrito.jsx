@@ -1,6 +1,5 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "bootstrap";
 import React, { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
 import ButtonPagarCarrito from "./ButtonPagarCarrito";
